@@ -193,8 +193,8 @@ def _secure_sandbox_worker(code: str, df: pd.DataFrame, response_queue: multipro
         })
 
 def clean_ai_code(raw: str) -> str:
-    code_match = re.search(r"```python\s*(.*?)\s*
-```", raw, re.DOTALL | re.IGNORECASE)
+   code_match = re.search(r"
+```python\s*(.*?)\s*```", raw, re.DOTALL | re.IGNORECASE)
     if code_match:
         return code_match.group(1).strip()
     code_match_generic = re.search(r"```\s*(.*?)\s*```", raw, re.DOTALL)
