@@ -307,7 +307,9 @@ def call_ai_with_timeout(client, prompt: str, timeout: int = AI_TIMEOUT_SECONDS,
             if attempt < max_retries - 1:
                 time.sleep(1.5 * (attempt + 1))
                 
-    raise last_exception
+    if last_exception is not None:
+        raise last_exception
+    raise RuntimeError("AI request failed")
 
 def trim_memory():
     if len(st.session_state.command_history) > 50:
